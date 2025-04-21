@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% block title %}Student Dashboard{% endblock %}
+{% block content %}
+
+<!-- Alert Messages -->
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  {% endfor %}
+{% endif %}
+
+<!-- Logout Button -->
+<div style="position: absolute; top: 20px; right: 20px;">
+  <a href="{% url 'logout' %}" class="btn btn-danger" style="padding: 8px 16px; background-color: #dc3545; color: white; text-decoration: none; border-radius: 4px;">Logout</a>
+</div>
+
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Your Complaints</h2>
+    <a href="{% url 'complaint' %}" class="btn btn-success">+ File New Complaint</a>
+  </div>
+
+  {% if complaints %}
+    <div style="max-height: calc(100vh - 240px); overflow-y: auto;">
+      <table class="table table-striped">
+        <thead class="table-light" style="position: sticky; top: 0; z-index: 1;">
+          <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Department</th>
+            <th>Location</th>
+            <th>Image</th>
+            <th>Date</th>
+            <th>Status / Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for complaint in complaints %}
+            <tr>
+              <td>{{ complaint.title }}</td>
+              <td>{{ complaint.discription }}</td>
+              <td>{{ complaint.faculty }}</td>
+              <td>{{ complaint.location }}</td>
+              <td>
+                {% if complaint.image %}
+                  <a href="{{ complaint.image.url }}" target="_blank">View</a>
+                {% else %}
+                  None
+                {% endif %}
+              </td>
+              <td>{{ complaint.pub_date|date:"Y-m-d H:i" }}</td>
+              <td>
+                <div class="d-flex justify-content-between align-items-center">
+                  <span>{{ complaint.status }}</span>
+                  {% if complaint.status == "Pending" %}
+                    <form action="{% url 'withdraw_complaint' complaint.complaint_id %}" method="post" style="display: inline;">
+                      {% csrf_token %}
+                      <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to withdraw this complaint?');">
+                        Withdraw
+                      </button>
+                    </form>
+                  {% endif %}
+                </div>
+              </td>              
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <p>You haven't submitted any complaints yet.</p>
+  {% endif %}
+</div>
+
+{% endblock %}

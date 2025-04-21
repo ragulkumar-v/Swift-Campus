@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}About Us{% endblock %}
+{% block content %}
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>About Us</h2>
+    {% if user_role == 'student' %}
+      <a href="{% url 'student_dashboard' %}" class="btn btn-secondary">
+        ⬅️ Back to Dashboard
+      </a>
+    {% elif user_role == 'staff' %}
+      <a href="{% url 'staff' %}" class="btn btn-secondary">
+        ⬅️ Back to Dashboard
+      </a>
+    {% endif %}
+  </div>
+
+  <hr>
+
+  <p>Swift-Campus is a project developed by students at the Knight Foundation School of Computing and Information Science as part of the CEN 5011 – Advanced Software Engineering course under Dr. Charlyne Walker.</p>
+  <p>The goal of this application is to streamline the complaint submission process and ensure proper verification and resolution workflow, emphasizing usability and accountability.</p>
+  <p>We believe in clear communication, timely resolution, and user satisfaction. This project reflects our team's efforts in software verification, requirement adherence, and functional delivery.</p>
+</div>
+{% endblock %}

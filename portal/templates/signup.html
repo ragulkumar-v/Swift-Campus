@@ -1,0 +1,101 @@
+{% extends 'clean.html' %}
+{% block title %} Signup {% endblock %}
+{% block content %}
+
+<div class="container my-5 p-5">
+  <h2 class="mb-4">Create an Account</h2>
+
+  <!-- Django messages (filtered to exclude login errors) -->
+  {% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  {% endfor %}
+{% endif %}
+
+
+  <form method="POST">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="username" class="form-label">Username</label>
+      <input type="text" class="form-control" id="username" name="username" placeholder="Enter a username" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" class="form-control" id="email" name="email" placeholder="user@example.com">
+    </div>
+
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input type="password" class="form-control" id="password" name="password" placeholder="Enter a password" required>
+      <small id="passwordHelp" class="form-text text-muted"></small>
+    </div>
+
+    <div class="mb-3">
+      <label for="confirm_password" class="form-label">Confirm Password</label>
+      <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Re-enter your password" required>
+    </div>
+
+    <div class="mb-3">
+      <input type="hidden" name="role" value="student">
+    </div> 
+
+    <button type="submit" class="btn btn-success my-2 w-100" id="submitBtn" disabled>Sign Up</button>
+  </form>
+
+  <p class="mt-3 text-center">
+    Already have an account?
+    <a href="{% url 'login' %}">Log in</a>
+  </p>
+</div>
+
+<!-- Password strength checker -->
+<script>
+  const passwordInput = document.getElementById("password");
+  const confirmPasswordInput = document.getElementById("confirm_password");
+  const passwordHelp = document.getElementById("passwordHelp");
+  const submitBtn = document.getElementById("submitBtn");
+
+  function validatePasswords() {
+    const password = passwordInput.value;
+    const confirmPassword = confirmPasswordInput.value;
+
+    const hasUpper = /[A-Z]/.test(password);
+    const hasLower = /[a-z]/.test(password);
+    const hasNumber = /\d/.test(password);
+    const hasSpecial = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+    const isLongEnough = password.length >= 8;
+
+    const isStrong = hasUpper && hasLower && hasNumber && hasSpecial && isLongEnough;
+    const isMatching = password === confirmPassword;
+
+    if (!password) {
+      passwordHelp.textContent = "";
+      submitBtn.disabled = true;
+    } else if (!isStrong) {
+      passwordHelp.textContent = "❌ Password must be 8+ characters with uppercase, lowercase, number, and special character.";
+      passwordHelp.style.color = "red";
+      submitBtn.disabled = true;
+    } else if (!isMatching) {
+      passwordHelp.textContent = "❌ Passwords do not match.";
+      passwordHelp.style.color = "red";
+      submitBtn.disabled = true;
+    } else {
+      passwordHelp.textContent = "✅ Strong password and confirmed.";
+      passwordHelp.style.color = "green";
+      submitBtn.disabled = false;
+    }
+  }
+
+  passwordInput.addEventListener("input", validatePasswords);
+  confirmPasswordInput.addEventListener("input", validatePasswords);
+</script>
+
+
+{% endblock %}
+
+
+

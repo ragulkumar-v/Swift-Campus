@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}Frequently Asked Questions{% endblock %}
+{% block content %}
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Frequently Asked Questions</h2>
+    {% if user_role == 'student' %}
+      <a href="{% url 'student_dashboard' %}" class="btn btn-secondary">
+        ⬅️ Back to Dashboard
+      </a>
+    {% elif user_role == 'staff' %}
+      <a href="{% url 'staff' %}" class="btn btn-secondary">
+        ⬅️ Back to Dashboard
+      </a>
+    {% endif %}
+  </div>
+
+  <hr>
+
+  <h5>Q: What is the Swift-Campus platform?</h5>
+  <p>A: Swift-Campus is a complaint management platform developed by students for managing campus-related complaints efficiently.</p>
+
+  <h5>Q: Who can file a complaint?</h5>
+  <p>A: Currently, any registered student can log in and file complaints. Staff members can view and resolve them.</p>
+
+  <h5>Q: How do I get notified about complaint updates?</h5>
+  <p>A: After filing a complaint, you will receive a confirmation email. You’ll also be notified when your complaint is resolved.</p>
+
+  <h5>Q: How can I change my password?</h5>
+  <p>A: You click on reset password.</p>
+</div>
+{% endblock %}
