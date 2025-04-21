@@ -94,3 +94,10 @@ swift-campus/
 
 ### License
 This project is licensed under the MIT License — see the LICENSE file for details.
+
+### Project Team Mates
+Bhuvan Loknath Lnu  
+Manuel Hernandez  
+Ragul Kumar Venkateswaran 
+Nibray Vazquez  
+
