@@ -71,10 +71,10 @@ Open your browser and go to ```bash http://127.0.0.1:8000/ ```.
 ### 📁 Project Structure
 ```bash
 swift-campus/
-├── complaints/           # Django app for managing complaints
-├── users/                # Authentication and user roles
-├── templates/            # HTML templates
-├── static/               # CSS, JS, and image files
+├── complaint_images/           # Django app for managing complaints
+├── Portal/           
+   ├──templates/              # HTML templates
+├── swiftcampus/               # CSS, JS, and image files
 ├── media/                # Uploaded images
 ├── manage.py
 └── db.sqlite3
@@ -94,7 +94,3 @@ swift-campus/
 
 ### License
 This project is licensed under the MIT License — see the LICENSE file for details.
-
-# cygnus-campus-complaint-app
- web portal for students to register their complaints about any matter in the campus
-![](working.gif)
