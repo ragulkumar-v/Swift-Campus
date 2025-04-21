@@ -97,7 +97,7 @@ This project is licensed under the MIT License — see the LICENSE file for deta
 
 ### Project Team Mates
 Bhuvan Loknath Lnu  
-Manuel Hernandez
-Nibray Vazquez 
-Ragul Kumar Venkateswaran 
+Manuel Hernandez  
+Nibray Vazquez  
+Ragul Kumar Venkateswaran  
 
